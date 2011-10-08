@@ -8,5 +8,6 @@ namespace Experia.Framework.Physics
     class Class1
     {
         //Lorem Ipsum Dolor
+        //Sit Amit Amaet
     }
 }
