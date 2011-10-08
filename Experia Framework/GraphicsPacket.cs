@@ -11,55 +11,59 @@ namespace Experia.Framework
     public class GraphicsPacket
     {
         public enum Flags { FXAA, MultiSampling, SuperSampling, LegitVsync, FakeVsync }
-        public GraphicsDevice Device { get { return Manager.GraphicsDevice; } }
-        
+        public GraphicsDevice Device { get { return m_GraphicsDeviceManager.GraphicsDevice; } }
+        public SpriteBatch SpriteBatch;
         public event GraphicsRebuildArgs HookGraphicsRebuild;
 
-        protected bool _bDeviceChanged;
-        protected Vector2[] _v2Resolutions;
-        protected PresentationParameters _presentationParams;
-        protected GraphicsDeviceManager Manager;
+        protected bool m_DeviceChanged;
+        protected Vector2[] m_v2Resolutions;
+        protected PresentationParameters m_PresentationParams;
+        protected GraphicsDeviceManager m_GraphicsDeviceManager;
 
         public GraphicsPacket(ExperiaCore game, ContentLoader contentLoader)
         {
-            Manager = new GraphicsDeviceManager(game);
-            _v2Resolutions = new Vector2[2];
-            _presentationParams = new PresentationParameters();
-            _bDeviceChanged = true;
+            m_GraphicsDeviceManager = new GraphicsDeviceManager(game);
+            m_v2Resolutions = new Vector2[2];
+            m_PresentationParams = new PresentationParameters();
+            m_DeviceChanged = true;
             
             /*++++++Renderers/Shaders++++++*/
-
+        }
+        public void EnableSprites()
+        {
+            if(SpriteBatch == null)
+                SpriteBatch = new SpriteBatch(m_GraphicsDeviceManager.GraphicsDevice);
         }
         public void ScreenResolution(Vector2 v2Resolution)
         {
-            _v2Resolutions[0] = v2Resolution;
-            _presentationParams.BackBufferWidth = (int)v2Resolution.X;
-            _presentationParams.BackBufferHeight = (int)v2Resolution.Y;
-            _bDeviceChanged = true;
+            m_v2Resolutions[0] = v2Resolution;
+            m_PresentationParams.BackBufferWidth = (int)v2Resolution.X;
+            m_PresentationParams.BackBufferHeight = (int)v2Resolution.Y;
+            m_DeviceChanged = true;
         }
         public void BufferResolution(Vector2 v2Resolution)
         {
-            _v2Resolutions[1] = v2Resolution;
-            _bDeviceChanged = true;
+            m_v2Resolutions[1] = v2Resolution;
+            m_DeviceChanged = true;
         }
         public void AntiAliasing(Flags aaType, bool bEnabled)
         {
             switch (aaType)
             {
                 case Flags.MultiSampling:
-                    Manager.PreferMultiSampling = bEnabled;
-                    _presentationParams.MultiSampleCount = 4;
-                    _bDeviceChanged = true;
+                    m_GraphicsDeviceManager.PreferMultiSampling = bEnabled;
+                    m_PresentationParams.MultiSampleCount = 4;
+                    m_DeviceChanged = true;
                     break;
                 case Flags.FXAA:
                     //Implementation
 
-                    _bDeviceChanged = true;
+                    m_DeviceChanged = true;
                     break;
                 case Flags.SuperSampling:
                     //Implementation
 
-                    _bDeviceChanged = true;
+                    m_DeviceChanged = true;
                     break;
             }
         }
@@ -67,7 +71,7 @@ namespace Experia.Framework
         {
             if (vsyncType == Flags.LegitVsync)
             {
-                Manager.SynchronizeWithVerticalRetrace = true;
+                m_GraphicsDeviceManager.SynchronizeWithVerticalRetrace = true;
             }
             else
             {
@@ -76,17 +80,20 @@ namespace Experia.Framework
         }
         public void Update()
         {
-            if (_bDeviceChanged)
+            if (m_DeviceChanged)
             {
 
-                Manager.ApplyChanges();
+                m_GraphicsDeviceManager.ApplyChanges();
 
                 if (HookGraphicsRebuild != null)
+                {
+                    HookGraphicsRebuild.Invoke(this);
+                }
 
 
                 //++Recreate Our Shader Materials++//
 
-                _bDeviceChanged = false;
+                m_DeviceChanged = false;
             }
         }
     }

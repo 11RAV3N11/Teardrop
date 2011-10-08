@@ -1,6 +1,6 @@
 using System;
 
-namespace Candy_Rush
+namespace CandyRush
 {
 #if WINDOWS || XBOX
     static class Program
@@ -10,7 +10,7 @@ namespace Candy_Rush
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (CandyRushGame game = new CandyRushGame())
             {
                 game.Run();
             }

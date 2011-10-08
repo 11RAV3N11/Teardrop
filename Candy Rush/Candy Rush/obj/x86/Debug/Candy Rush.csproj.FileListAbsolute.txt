@@ -6,3 +6,4 @@ E:\Dropbox\Projects\C#\Experia Framework\Candy Rush\Candy Rush\bin\x86\Debug\Exp
 E:\Dropbox\Projects\C#\Experia Framework\Candy Rush\Candy Rush\bin\x86\Debug\Experia Framework.pdb
 E:\Dropbox\Projects\C#\Experia Framework\Candy Rush\Candy Rush\obj\x86\Debug\Candy Rush.exe
 E:\Dropbox\Projects\C#\Experia Framework\Candy Rush\Candy Rush\obj\x86\Debug\Candy Rush.pdb
+E:\Dropbox\Projects\C#\Experia Framework\Candy Rush\Candy Rush\bin\x86\Debug\Content\Zombie.xnb

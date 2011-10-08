@@ -14,13 +14,16 @@ namespace Experia.Framework
     {
         protected const int ConstMaxManagers = 4;
         protected ThreadedContentManager[] _Content;
-
-        public ContentLoader(ExperiaCore game)
+        public static ContentLoader Instance { get { return Experia.Framework.Generics.Singleton<ContentLoader>.Instance; } }
+        protected ContentLoader()
         {
-
             _Content = new ThreadedContentManager[ConstMaxManagers];
+        }
+
+        public void Initialize(ExperiaCore core)
+        {
             for (int i = 0; i < _Content.Length; i++)
-                _Content[i] = new ThreadedContentManager(game.Services);
+                _Content[i] = new ThreadedContentManager(core.Services);
         }
 
         public T Load<T>(Container container, string assetLocation)

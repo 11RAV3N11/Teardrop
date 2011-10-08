@@ -19,7 +19,7 @@ namespace Experia.Framework
         public List<BaseGameEntity> GetGameObjects { get { return m_GameObjects; } }
         public List<BaseDrawableGameEntity> GetDrawableGameObjects { get { return m_DrawableGameObjects; } }
 
-        public EntityManager()
+        protected EntityManager()
         {
             m_GameObjects = new List<BaseGameEntity>();
             m_DrawableGameObjects = new List<BaseDrawableGameEntity>();

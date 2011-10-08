@@ -109,7 +109,7 @@
     <Compile Include="Interfaces\IGameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Content\ThreadedContentManager.cs" />
-    <Compile Include="Sprites\DoodadSprite.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="UpdatePacket.cs" />
   </ItemGroup>
   <ItemGroup />
