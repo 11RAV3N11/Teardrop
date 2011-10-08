@@ -7,5 +7,6 @@ namespace Experia.Framework.Physics
 {
     class Class1
     {
+        //Lorem Ipsum Dolor
     }
 }
