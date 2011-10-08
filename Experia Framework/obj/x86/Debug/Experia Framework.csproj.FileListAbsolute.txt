@@ -1,0 +1,6 @@
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\bin\x86\Debug\Experia Framework.dll
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\bin\x86\Debug\Experia Framework.pdb
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\obj\x86\Debug\Experia Framework.dll
+E:\Dropbox\Projects\C#\Experia Framework\Experia Framework\obj\x86\Debug\Experia Framework.pdb

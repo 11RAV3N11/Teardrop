@@ -8,10 +8,19 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Experia.Framework.Interfaces;
 
-namespace Experia_Framework
+namespace Experia.Framework
 {
-    public class Class1
+    public class ExperiaCore: Game
     {
+        new public ContentLoader Content;
+        public GraphicsPacket Graphics;
+        public UpdatePacket UpdatePacket;
+        protected EngineFlags m_EngineFlags;
+        public ExperiaCore(EngineFlags flags)
+        {
+
+        }
     }
 }
