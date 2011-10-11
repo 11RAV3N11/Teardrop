@@ -16,14 +16,13 @@ namespace CandyRush
     public class CandyRushGame: ExperiaCore
     {
         SpriteBatch spriteBatch;
-        Zombie m_Ricardo;
 
         bool m_GameStarted = false;
 
         public CandyRushGame(): base(EngineFlags.Debug | EngineFlags.MultiCore)
         {
             ContentLoader.Instance.Initialize(this);
-            base.Graphics = new GraphicsPacket(this, base.Content);
+            base.Graphics = new Graphics(this, base.Content);
         }
 
         /// <summary>
@@ -37,6 +36,10 @@ namespace CandyRush
             // TODO: Add your initialization logic here
             base.Graphics.EnableSprites();
             EntityManager.Instance.GetDrawableGameObjects.Add(new Zombie());
+            Zombie temp = new Zombie();
+            temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(Container.Game, @"Content\\Maru");
+            temp.Sprite.Position = new Vector2(100f, 200f);
+            EntityManager.Instance.GetDrawableGameObjects.Add(temp);
             base.Initialize();
         }
 
@@ -67,16 +70,13 @@ namespace CandyRush
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
             if (m_GameStarted)
             {
-                EntityManager.Instance.Update(base.UpdatePacket);
+                EntityManager.Instance.Update();
             }
             else
             {
-                EntityManager.Instance.Initialize(UpdatePacket, Graphics);
+                EntityManager.Instance.Initialize(Graphics);
                 m_GameStarted = true;
             }
                 // TODO: Add your update logic here

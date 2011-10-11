@@ -10,6 +10,11 @@ namespace Experia.Framework.Components
 {
     public class InputManager
     {
+        public InputManager Instance
+        {
+            get { return Experia.Framework.Generics.Singleton<InputManager>.Instance; }
+        }
+
         protected MouseExtension m_Mouse;
         protected KeyboardExtension m_Keyboard;
         protected GamePadExtension m_GamePad;
@@ -32,11 +37,6 @@ namespace Experia.Framework.Components
                 m_Mouse = new MouseExtension();
                 m_Mouse.Initialize(mouseTexture, clampToWindow);
             }
-        }
-
-        public InputManager Instance
-        {
-            get { return Experia.Framework.Generics.Singleton<InputManager>.Instance; }
         }
         protected InputManager()
         {

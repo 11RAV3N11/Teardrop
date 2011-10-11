@@ -23,5 +23,10 @@ namespace Experia.Framework
             SpriteEffects = SpriteEffects.None;
             BoundingBox = new BoundingBox();
         }
+        public static void Draw(SpriteBatch spriteBatch, Sprite sprite)
+        {
+            if(sprite.Texture != null)
+            spriteBatch.Draw(sprite.Texture, sprite.Position, null, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.SpriteEffects, sprite.Layer);
+        }
     }
 }

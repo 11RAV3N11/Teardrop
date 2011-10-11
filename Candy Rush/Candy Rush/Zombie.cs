@@ -6,26 +6,23 @@ using Experia.Framework.Entities;
 
 namespace CandyRush
 {
-    class Zombie: BaseDrawableGameEntity
+    class Zombie: BaseDrawableGameEntity2D
     {
-        public Sprite Sprite;
-        public override void Initialize(Experia.Framework.UpdatePacket updatePacket, Experia.Framework.GraphicsPacket graphics)
+        public Sprite Sprite = new Sprite();
+        public override void Initialize(Graphics graphics)
         {
-            Sprite = new Sprite();
+            if(Sprite.Texture == null)
             Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(Container.Game, @"Content\\Zombie");
-            base.Display = true;
-            base.m_Disposed = false;
-            base.m_Enabled = true;
-            base.Initialize(updatePacket, graphics);
         }
-        public override void Update(UpdatePacket updatePacket)
+        public override void Update()
         {
-
+            if (this != EntityManager.Instance.GetDrawableGameObjects[0])
+                Sprite.Color = Color.Red;
         }
-        public override void Draw(GraphicsPacket graphics)
+        public override void Draw(Graphics graphics)
         {
             graphics.SpriteBatch.Begin();
-            graphics.SpriteBatch.Draw(Sprite.Texture, Sprite.Position, null, Sprite.Color, Sprite.Rotation, Sprite.Origin, Sprite.Scale, Sprite.SpriteEffects, Sprite.Layer);
+            Sprite.Draw(graphics.SpriteBatch, Sprite);
             graphics.SpriteBatch.End();
         }
     }
