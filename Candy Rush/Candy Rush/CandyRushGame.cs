@@ -16,6 +16,7 @@ namespace CandyRush
     public class CandyRushGame: ExperiaCore
     {
         SpriteBatch spriteBatch;
+        Font2D m_TestFont;
 
         bool m_GameStarted = false;
 
@@ -40,6 +41,8 @@ namespace CandyRush
             temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(Container.Game, @"Content\\Maru");
             temp.Sprite.Position = new Vector2(100f, 200f);
             EntityManager.Instance.GetDrawableGameObjects.Add(temp);
+            m_TestFont = new Font2D(@"Content\\Chiller");
+            m_TestFont.Color = Color.Orange;
             base.Initialize();
         }
 
@@ -91,9 +94,11 @@ namespace CandyRush
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
             EntityManager.Instance.Draw(base.Graphics);
+            Graphics.SpriteBatch.Begin();
+            m_TestFont.Draw(Graphics.SpriteBatch, "Candy Rush!", new Vector2(0f + m_TestFont.MeasureString("Candy Rush!").X, 100f));
+            Graphics.SpriteBatch.End();
             base.Draw(gameTime);
         }
     }

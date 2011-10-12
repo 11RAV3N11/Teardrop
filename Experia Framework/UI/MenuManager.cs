@@ -5,13 +5,9 @@ namespace Experia.Framework.UI
     public class MenuManager
     {
         public MenuManager Instance { get { return Experia.Framework.Generics.Singleton<MenuManager>.Instance; } }
-        protected bool m_Active;
-        public bool Active
-        {
-            get { return m_Active; }
-        }
 
         protected Dictionary<string, BaseMenuScreen> m_Menus;
+        /// <summary>Return the Collection of Menus</summary>
         public Dictionary<string, BaseMenuScreen> Menu
         {
             get
