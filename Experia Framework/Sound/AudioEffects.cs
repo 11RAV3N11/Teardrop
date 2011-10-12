@@ -8,23 +8,24 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Experia.Framework.Audio;
 
-namespace Sound_Engine
+namespace Experia.Framework
 {
-    class AudioEffects
+    class AudioEffect
     {
-        public SoundEffect KeyWord = null;
-        public SoundEffectInstance keyWord = null;
+        protected SoundEffect m_SoundEffect = null;
+        protected SoundEffectInstance m_SoundEffectInstance = null;
 
         public float Volume = 0.0f;
         public float Pitch = 0.0f;
         public float Pan = 0.0f;
         
 
-        public void LoadAudioEffect(string Location, ContentManager Content)
+        public void LoadAudioEffect(string Location, ContentContainer container)
         {
-            KeyWord = Content.Load<SoundEffect>(Location);
-            keyWord = KeyWord.CreateInstance();
+            m_SoundEffect = ContentLoader.Instance.Load<SoundEffect>(container, Location);
+            m_SoundEffectInstance = m_SoundEffect.CreateInstance();
         }
 
         /// <summary>
@@ -32,8 +33,8 @@ namespace Sound_Engine
         /// </summary>
         public void PlayAudioEffect()
         {
-            if ( keyWord.State != SoundState.Playing)
-                 keyWord.Play();
+            if ( m_SoundEffectInstance.State != SoundState.Playing)
+                 m_SoundEffectInstance.Play();
         }
 
         /// <summary>
@@ -41,8 +42,8 @@ namespace Sound_Engine
         /// </summary>
         public void PauseAudioEffect()
         {
-            if (keyWord.State == SoundState.Playing)
-                keyWord.Pause();
+            if (m_SoundEffectInstance.State == SoundState.Playing)
+                m_SoundEffectInstance.Pause();
         }
 
         /// <summary>
@@ -50,8 +51,8 @@ namespace Sound_Engine
         /// </summary>
         public void ResumeAudioEffect()
         {
-            if (keyWord.State == SoundState.Paused)
-                keyWord.Resume();
+            if (m_SoundEffectInstance.State == SoundState.Paused)
+                m_SoundEffectInstance.Resume();
         }
 
         /// <summary>
@@ -59,8 +60,8 @@ namespace Sound_Engine
         /// </summary>
         public void StopAudioEffect()
         {
-            if ( keyWord.State == SoundState.Playing ||  keyWord.State == SoundState.Paused)
-                 keyWord.Stop();
+            if ( m_SoundEffectInstance.State == SoundState.Playing ||  m_SoundEffectInstance.State == SoundState.Paused)
+                 m_SoundEffectInstance.Stop();
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Sound_Engine
         public void AudioEffectVolume(float volume)
         {
             volume = MathHelper.Clamp(volume, 0.0f, 1.0f);
-            Volume = volume * AudioEngine.Instance.MasterVolume;
+            Volume = volume * AudioManager.Instance.MasterVolume; //<-- This does not actually change the sound [AP]
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace Sound_Engine
         public void PanAudioEffect(float pan)
         {
             pan = MathHelper.Clamp(pan, 0.0f, 1.0f);
-            keyWord.Pan = pan;
+            m_SoundEffectInstance.Pan = pan;
         }
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace Sound_Engine
         public void PitchAudioEffect(float pitch)
         {
             pitch = MathHelper.Clamp(pitch, 0.0f, 1.0f);
-            keyWord.Pitch = pitch;
+            m_SoundEffectInstance.Pitch = pitch;
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Experia.Framework
 {
-    public enum Container { Persistent = 0, Engine = 1, UI = 2, Game = 3, Temporary = 4 }
+    public enum ContentContainer { Persistent = 0, Engine = 1, UI = 2, Game = 3, Temporary = 4 }
     public class ContentLoader
     {
         protected const int ConstMaxManagers = 4;
@@ -26,7 +26,7 @@ namespace Experia.Framework
                 _Content[i] = new ThreadedContentManager(core.Services);
         }
 
-        public T Load<T>(Container container, string assetLocation)
+        public T Load<T>(ContentContainer container, string assetLocation)
         {
             return _Content[(int)container].Load<T>(assetLocation);
         }

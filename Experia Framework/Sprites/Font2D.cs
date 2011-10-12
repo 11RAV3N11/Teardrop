@@ -16,7 +16,7 @@ namespace Experia.Framework
         public SpriteEffects Effects;
         public Font2D(string spriteFontLocation)
         {
-            m_Font = ContentLoader.Instance.Load<SpriteFont>(Container.Persistent, spriteFontLocation);
+            m_Font = ContentLoader.Instance.Load<SpriteFont>(ContentContainer.Persistent, spriteFontLocation);
             Color = Color.White;
             Origin = Vector2.Zero;
             Scale = Vector2.One;

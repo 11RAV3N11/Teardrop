@@ -38,7 +38,7 @@ namespace CandyRush
             base.Graphics.EnableSprites();
             EntityManager.Instance.GetDrawableGameObjects.Add(new Zombie());
             Zombie temp = new Zombie();
-            temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(Container.Game, @"Content\\Maru");
+            temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Maru");
             temp.Sprite.Position = new Vector2(100f, 200f);
             EntityManager.Instance.GetDrawableGameObjects.Add(temp);
             m_TestFont = new Font2D(@"Content\\Chiller");

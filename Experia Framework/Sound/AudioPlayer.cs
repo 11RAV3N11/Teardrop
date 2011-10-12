@@ -8,20 +8,21 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Experia.Framework.Audio;
 
-namespace Sound_Engine
+namespace Experia.Framework
 {
     class AudioPlayer
     {
-        public Song Media = null;
+        public Song m_Song = null;
 
         public float Volume = 0.0f;
-        public float Pitch = 0.0f;
-        public float Pan = 0.0f;
+        public float Pitch = 0.0f; //<-- This does not actually change the sound [AP]
+        public float Pan = 0.0f; //<-- This does not actually change the sound [AP]
 
-        public void LoadSong(string Location, ContentManager Content)
+        public void LoadSong(string Location, ContentContainer container)
         {
-            Media = Content.Load<Song>(Location);
+            m_Song = ContentLoader.Instance.Load<Song>(container, Location);
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Sound_Engine
         public void PlaySong()
         {
             if (MediaPlayer.State != MediaState.Playing)
-                MediaPlayer.Play(Media);
+                MediaPlayer.Play(m_Song);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Sound_Engine
         public void SongVolume(float volume)
         {
             volume = MathHelper.Clamp(volume, 0.0f, 1.0f);
-            Volume = volume * AudioEngine.Instance.MasterVolume;
+            Volume = volume * AudioManager.Instance.MasterVolume; //<-- This does not actually change the sound [AP]
         }
     }
 }

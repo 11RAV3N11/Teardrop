@@ -12,7 +12,7 @@ namespace CandyRush
         public override void Initialize(Graphics graphics)
         {
             if(Sprite.Texture == null)
-            Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(Container.Game, @"Content\\Zombie");
+            Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Zombie");
         }
         public override void Update()
         {
