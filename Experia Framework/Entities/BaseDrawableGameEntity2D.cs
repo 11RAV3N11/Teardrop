@@ -11,6 +11,7 @@ namespace Experia.Framework.Entities
             m_Disposed = false;
             Display = true;
             Enabled = true;
+            Sprite = new Sprite();
         }
 
         public abstract void Draw(Graphics graphics);

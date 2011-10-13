@@ -95,7 +95,7 @@
   <ItemGroup>
     <Compile Include="Content\AsyncContentManager.cs" />
     <Compile Include="Content\ContentLoader.cs" />
-    <Compile Include="Entities\BaseDrawableGameEntity.cs" />
+    <Compile Include="Entities\BaseDrawableGameEntity2D.cs" />
     <Compile Include="Entities\BaseDrawableGameEntity3D.cs" />
     <Compile Include="Entities\BaseGameEntity.cs" />
     <Compile Include="EntityManager.cs" />
