@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Experia.Framework;
+using Experia.Framework.Audio;
 
 namespace CandyRush
 {
@@ -17,6 +18,9 @@ namespace CandyRush
     {
         SpriteBatch spriteBatch;
         Font2D m_TestFont;
+
+        //AudioEffect gunshot;
+        AudioPlayer skrillex;
 
         bool m_GameStarted = false;
 
@@ -43,6 +47,19 @@ namespace CandyRush
             EntityManager.Instance.AddGameEntity(temp);
             m_TestFont = new Font2D(@"Content\\Chiller");
             m_TestFont.Color = Color.Orange;
+
+             //TODO: Add your initialization logic here
+
+            //gunshot = new AudioEffect();
+            //gunshot.LoadAudioEffect(@"content\\gunshot", ContentContainer.Game);
+            //gunshot.PlayAudioEffect();
+            //gunshot.Volume = 1.0f;
+
+            skrillex = new AudioPlayer();
+            skrillex.LoadSong(@"content\\slats", ContentContainer.Game);
+            skrillex.PlaySong();
+            skrillex.Volume = 1.0f;
+
             base.Initialize();
         }
 

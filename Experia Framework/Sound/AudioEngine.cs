@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 
 namespace Experia.Framework.Audio
 {
     public class AudioManager
     {
         public static AudioManager Instance { get { return Experia.Framework.Generics.Singleton<AudioManager>.Instance; } }
-
+        protected AudioManager() { }
         protected float m_MasterVolume = 1.0f;
         public float MasterVolume
         {
