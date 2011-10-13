@@ -8,7 +8,6 @@ namespace CandyRush
 {
     class Zombie: BaseDrawableGameEntity2D
     {
-        public Sprite Sprite = new Sprite();
         public override void Initialize(Graphics graphics)
         {
             if(Sprite.Texture == null)
