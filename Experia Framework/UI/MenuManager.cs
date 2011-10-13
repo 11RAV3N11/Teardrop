@@ -5,37 +5,30 @@ namespace Experia.Framework.UI
     public class MenuManager
     {
         public MenuManager Instance { get { return Experia.Framework.Generics.Singleton<MenuManager>.Instance; } }
-
-        protected Dictionary<string, BaseMenuScreen> m_Menus;
-        /// <summary>Return the Collection of Menus</summary>
-        public Dictionary<string, BaseMenuScreen> Menu
-        {
-            get
-            {
-                return m_Menus;
-            }
-        }
+        public Dictionary<string, BaseMenuScreen> Menus;
+        public bool Active;
         protected MenuManager()
         {
-            m_Menus = new Dictionary<string, BaseMenuScreen>();
+            Menus = new Dictionary<string, BaseMenuScreen>();
+            Active = true;
         }
         public void Update()
         {
-            foreach (KeyValuePair<string, BaseMenuScreen> kvp in m_Menus)
+            foreach (KeyValuePair<string, BaseMenuScreen> kvp in Menus)
             {
-                if (m_Menus[kvp.Key].Active)
+                if (Menus[kvp.Key].Active)
                 {
-                    m_Menus[kvp.Key].Update();
+                    Menus[kvp.Key].Update();
                 }
             }
         }
         public void Draw(GraphicsManager graphics)
         {
-            foreach (KeyValuePair<string, BaseMenuScreen> kvp in m_Menus)
+            foreach (KeyValuePair<string, BaseMenuScreen> kvp in Menus)
             {
-                if (m_Menus[kvp.Key].Active)
+                if (Menus[kvp.Key].Active)
                 {
-                    m_Menus[kvp.Key].Draw();
+                    Menus[kvp.Key].Draw();
                 }
             }
         }

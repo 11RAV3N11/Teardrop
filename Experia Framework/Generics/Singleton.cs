@@ -26,22 +26,11 @@ namespace Experia.Framework.Generics
                     {
                         if (m_Instance == null)
                         {
-                            ConstructorInfo constructor;
-
-                            try
-                            {
-                                //Set Binding flags to exclude public constructors
-                                constructor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
-                            }
-                            catch (Exception exception)
-                            {
-                                //Just in case someone does weird things to invoke this
-                                throw exception;
-                            }
+                            ConstructorInfo constructor = typeof(T).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
 
                             if (constructor == null || constructor.IsAssembly)
                             {
-                                throw new Exception("A private or protected constructor is needed for " + typeof(T).Name + " to be a singleton.");
+                                throw new InvalidOperationException("A private or protected constructor is needed for " + typeof(T).Name + " to be a singleton.");
                             }
                             //Invoke the constructor that was given to us
                             m_Instance = (T)constructor.Invoke(null);
