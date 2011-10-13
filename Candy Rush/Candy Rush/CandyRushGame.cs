@@ -13,7 +13,7 @@ using Experia.Framework;
 namespace CandyRush
 {
     /// <summary>This is the main type for your game</summary>
-    public class CandyRushGame: ExperiaCore
+    public class CandyRushGame: EngineCore
     {
         SpriteBatch spriteBatch;
         Font2D m_TestFont;
@@ -23,7 +23,7 @@ namespace CandyRush
         public CandyRushGame(): base(EngineFlags.Debug | EngineFlags.MultiCore)
         {
             ContentLoader.Instance.Initialize(this);
-            base.Graphics = new Graphics(this, base.Content);
+            GraphicsManager.Instance.Initialize(this);
         }
 
         /// <summary>
@@ -35,12 +35,12 @@ namespace CandyRush
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            base.Graphics.EnableSprites();
-            EntityManager.Instance.GetDrawableGameObjects.Add(new Zombie());
+            GraphicsManager.Instance.EnableSprites();
+            EntityManager.Instance.AddGameEntity(new Zombie());
             Zombie temp = new Zombie();
             temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Maru");
             temp.Sprite.Position = new Vector2(100f, 200f);
-            EntityManager.Instance.GetDrawableGameObjects.Add(temp);
+            EntityManager.Instance.AddGameEntity(temp);
             m_TestFont = new Font2D(@"Content\\Chiller");
             m_TestFont.Color = Color.Orange;
             base.Initialize();
@@ -79,7 +79,7 @@ namespace CandyRush
             }
             else
             {
-                EntityManager.Instance.Initialize(Graphics);
+                EntityManager.Instance.Initialize(GraphicsManager.Instance);
                 m_GameStarted = true;
             }
                 // TODO: Add your update logic here
@@ -95,10 +95,10 @@ namespace CandyRush
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
-            EntityManager.Instance.Draw(base.Graphics);
-            Graphics.SpriteBatch.Begin();
-            m_TestFont.Draw(Graphics.SpriteBatch, "Candy Rush!", new Vector2(0f + m_TestFont.MeasureString("Candy Rush!").X, 100f));
-            Graphics.SpriteBatch.End();
+            EntityManager.Instance.Draw(GraphicsManager.Instance);
+            GraphicsManager.Instance.SpriteBatch.Begin();
+            m_TestFont.Draw(GraphicsManager.Instance.SpriteBatch, "Candy Rush!", new Vector2(0f + m_TestFont.MeasureString("Candy Rush!").X, 100f));
+            GraphicsManager.Instance.SpriteBatch.End();
             base.Draw(gameTime);
         }
     }

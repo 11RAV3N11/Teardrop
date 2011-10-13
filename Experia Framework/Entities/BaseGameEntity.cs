@@ -11,7 +11,7 @@
             get { return m_Disposed; }
         }
 
-        public abstract void Initialize(Graphics graphics);
+        public abstract void Initialize(GraphicsManager graphics);
         public abstract void Update();
 
     }

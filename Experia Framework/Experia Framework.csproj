@@ -103,7 +103,7 @@
     <Compile Include="ExperiaCore.cs" />
     <Compile Include="Generics\Singleton.cs" />
     <Compile Include="Input\GamePadExtension.cs" />
-    <Compile Include="Graphics.cs" />
+    <Compile Include="GraphicsManager.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Input\KeyboardExtension.cs" />
     <Compile Include="Input\MouseExtension.cs" />

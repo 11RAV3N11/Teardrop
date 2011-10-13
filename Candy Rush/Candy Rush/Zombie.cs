@@ -8,17 +8,17 @@ namespace CandyRush
 {
     class Zombie: BaseDrawableGameEntity2D
     {
-        public override void Initialize(Graphics graphics)
+        public override void Initialize(GraphicsManager graphics)
         {
             if(Sprite.Texture == null)
             Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Zombie");
         }
         public override void Update()
         {
-            if (this != EntityManager.Instance.GetDrawableGameObjects[0])
+            if (this != EntityManager.Instance.DrawableGameObjects[0])
                 Sprite.Color = Color.Red;
         }
-        public override void Draw(Graphics graphics)
+        public override void Draw(GraphicsManager graphics)
         {
             graphics.SpriteBatch.Begin();
             Sprite.Draw(graphics.SpriteBatch, Sprite);

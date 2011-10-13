@@ -29,7 +29,7 @@ namespace Experia.Framework.UI
                 }
             }
         }
-        public void Draw(Graphics graphics)
+        public void Draw(GraphicsManager graphics)
         {
             foreach (KeyValuePair<string, BaseMenuScreen> kvp in m_Menus)
             {

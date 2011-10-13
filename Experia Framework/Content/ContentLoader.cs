@@ -20,7 +20,7 @@ namespace Experia.Framework
             _Content = new ThreadedContentManager[ConstMaxManagers];
         }
 
-        public void Initialize(ExperiaCore core)
+        public void Initialize(EngineCore core)
         {
             for (int i = 0; i < _Content.Length; i++)
                 _Content[i] = new ThreadedContentManager(core.Services);

@@ -11,12 +11,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Experia.Framework
 {
-    public class ExperiaCore: Game
+    public class EngineCore: Game
     {
         new public ContentLoader Content;
-        public Graphics Graphics;
         protected EngineFlags m_EngineFlags;
-        public ExperiaCore(EngineFlags flags)
+        public EngineCore(EngineFlags flags)
         {
 
         }

@@ -8,7 +8,7 @@ namespace Experia.Framework.Entities
     public class BaseDrawableGameEntity3D: BaseGameEntity
     {
         //Todo 3D stuff
-        public override void Initialize(Graphics graphics)
+        public override void Initialize(GraphicsManager graphics)
         {
             throw new NotImplementedException();
         }
