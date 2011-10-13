@@ -110,7 +110,7 @@
     <Compile Include="Input\MouseExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Content\ThreadedContentManager.cs" />
-    <Compile Include="Sound\AudioEffects.cs" />
+    <Compile Include="Sound\AudioEffect.cs" />
     <Compile Include="Sound\AudioEngine.cs" />
     <Compile Include="Sound\AudioPlayer.cs" />
     <Compile Include="Sprites\Font2D.cs" />
