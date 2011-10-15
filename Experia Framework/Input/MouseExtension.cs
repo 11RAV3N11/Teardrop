@@ -16,6 +16,8 @@ namespace Experia.Framework.Controls
         protected MouseState m_CurrentState, m_PreviousState;
         protected Vector2 m_PrevMousePosition, m_PrevDeltaMouse;
         protected int m_PrevMouseWheelValue, m_PrevMouseWheelDelta;
+        protected Rectangle m_Rectangle;
+        public Rectangle BoundingRectangle { get { return m_Rectangle; } }
         public Vector2 MouseDelta
         {
             get { return this.m_DeltaMouse; }
@@ -37,8 +39,7 @@ namespace Experia.Framework.Controls
                 Mouse.SetPosition((int)value.X, (int)value.Y);
             }
         }
-        /// <summary>(Internal - Input Manager) Called Inside the built-in Input Manager however may be instantiated and called if not using</summary>
-        public void Initialize(Texture2D t2dMouseIcon, bool MouseClamped)
+        public MouseExtension(Texture2D t2dMouseIcon, bool MouseClamped)
         {
             /*Prepare the Mouse Settings*/
             m_CurrentState = new MouseState(); m_PreviousState = new MouseState();
@@ -48,6 +49,8 @@ namespace Experia.Framework.Controls
 
             MouseTexture = new Texture2D[1];
             MouseTexture[0] = t2dMouseIcon;
+
+            m_Rectangle = new Rectangle();
             DisplayMouse = true;
         }
         /// <summary>(Internal - Input Manager) Called Inside the built-in Input Manager however may be instantiated and called if not using</summary>
@@ -95,9 +98,18 @@ namespace Experia.Framework.Controls
             m_MouseWheelDelta = m_CurrentState.ScrollWheelValue - m_PreviousState.ScrollWheelValue;
             m_MouseWheelValue += m_MouseWheelDelta;
 
+            m_Rectangle.X = (int)m_MousePosition.X; m_Rectangle.Y = (int)m_MousePosition.Y;
+
             if (ClampMouse)
                 if (ClampedMouse != Vector2.Zero)
                     Mouse.SetPosition((int)ClampedMouse.X, (int)ClampedMouse.Y);
+        }
+        public void Draw(GraphicsManager graphics)
+        {
+            if(MouseTexture != null)
+            graphics.SpriteBatch.Draw(MouseTexture[0], m_MousePosition, null, Color.White, 0.0f,
+                new Vector2((int)(MouseTexture[0].Width / 2f), (int)(MouseTexture[0].Height / 2f)),
+                1.0f, SpriteEffects.None, 0f);
         }
         /// <summary>(bool) Checks to see if a given Mouse Button has been pressed [INFO: Useful for spamming]</summary>
         public bool CheckMouseButtonDown(MouseButton Button)

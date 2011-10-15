@@ -9,15 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Experia.Framework;
+using Experia.Framework.UI;
 
 namespace CandyRush
 {
     /// <summary>This is the main type for your game</summary>
     public class CandyRushGame: EngineCore
     {
-        SpriteBatch spriteBatch;
-        Font2D m_TestFont;
-
         bool m_GameStarted = false;
 
         public CandyRushGame(): base(EngineFlags.Debug | EngineFlags.MultiCore)
@@ -34,15 +32,9 @@ namespace CandyRush
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             GraphicsManager.Instance.EnableSprites();
-            EntityManager.Instance.AddGameEntity(new Zombie());
-            Zombie temp = new Zombie();
-            temp.Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Maru");
-            temp.Sprite.Position = new Vector2(100f, 200f);
-            EntityManager.Instance.AddGameEntity(temp);
-            m_TestFont = new Font2D(@"Content\\Chiller");
-            m_TestFont.Color = Color.Orange;
+            MenuManager.Instance.CreateInstance<MainMenu>("Main Menu");
+            InputManager.Instance.EnableMouse(Content.Load<Texture2D>(ContentContainer.Engine, @"Content\\pumpkin"), true);
             base.Initialize();
         }
 
@@ -52,9 +44,6 @@ namespace CandyRush
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -63,7 +52,7 @@ namespace CandyRush
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
         /// <summary>
@@ -73,9 +62,11 @@ namespace CandyRush
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            InputManager.Instance.Update(GraphicsManager.Instance.Device.Viewport.Bounds);
             if (m_GameStarted)
             {
                 EntityManager.Instance.Update();
+                MenuManager.Instance.Update();
             }
             else
             {
@@ -94,10 +85,9 @@ namespace CandyRush
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
-            EntityManager.Instance.Draw(GraphicsManager.Instance);
             GraphicsManager.Instance.SpriteBatch.Begin();
-            m_TestFont.Draw(GraphicsManager.Instance.SpriteBatch, "Candy Rush!", new Vector2(0f + m_TestFont.MeasureString("Candy Rush!").X, 100f));
+            MenuManager.Instance.Draw(GraphicsManager.Instance);
+            InputManager.Instance.Mouse.Draw(GraphicsManager.Instance);
             GraphicsManager.Instance.SpriteBatch.End();
             base.Draw(gameTime);
         }

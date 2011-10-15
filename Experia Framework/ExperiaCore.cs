@@ -13,7 +13,7 @@ namespace Experia.Framework
 {
     public class EngineCore: Game
     {
-        new public ContentLoader Content;
+        new public ContentLoader Content = ContentLoader.Instance;
         protected EngineFlags m_EngineFlags;
         public EngineCore(EngineFlags flags)
         {
