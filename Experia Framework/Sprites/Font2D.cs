@@ -9,7 +9,8 @@ namespace Experia.Framework
 {
     public class Font2D
     {
-        SpriteFont m_Font;
+        protected SpriteFont m_Font;
+        public SpriteFont Font { get { return m_Font; } }
         public Color Color;
         public float Rotation, Layer;
         public Vector2 Origin, Scale;
