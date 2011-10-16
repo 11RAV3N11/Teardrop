@@ -104,6 +104,7 @@
     <Compile Include="ExperiaCore.cs" />
     <Compile Include="ExperiaHelper.cs" />
     <Compile Include="Generics\Singleton.cs" />
+    <Compile Include="Graphics\Primitive2D.cs" />
     <Compile Include="Input\GamePadExtension.cs" />
     <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="Input\InputManager.cs" />
@@ -117,7 +118,7 @@
     <Compile Include="Sprites\Font2D.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="UI\BaseMenuScreen.cs" />
-    <Compile Include="UI\MenuButton.cs" />
+    <Compile Include="UI\TextButton.cs" />
     <Compile Include="UI\MenuManager.cs" />
   </ItemGroup>
   <ItemGroup>

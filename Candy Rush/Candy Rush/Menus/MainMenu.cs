@@ -12,16 +12,16 @@ namespace CandyRush
     public class MainMenu: BaseMenuScreen
     {
         Font2D m_MenuFont;
-        MenuButton[] m_Buttons;
+        TextButton[] m_Buttons;
         public MainMenu()
         {
-            m_Buttons = new MenuButton[3];
+            m_Buttons = new TextButton[3];
 
             m_MenuFont = new Font2D(@"Content\\Chiller");
             m_MenuFont.Color = Color.Orange;
             for (int i = 0; i < m_Buttons.Length; i++)
             {
-                m_Buttons[i] = new MenuButton();
+                m_Buttons[i] = new TextButton(m_MenuFont, "New Game");
             }
 
             m_Buttons[0].Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(50f, 50f));
@@ -29,12 +29,12 @@ namespace CandyRush
         public override void Update()
         {
             if (m_Buttons[0].Clicked)
-                throw new Exception("W00t!");
+                throw new Exception("Item Clicked!");
         }
 
         public override void Draw(GraphicsManager graphics)
         {
-            m_MenuFont.Draw(graphics.SpriteBatch, "New Game", m_Buttons[0].Position);
+            m_Buttons[0].Draw(graphics);
         }
     }
 }
