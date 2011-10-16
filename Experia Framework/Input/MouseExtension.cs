@@ -50,7 +50,7 @@ namespace Experia.Framework.Controls
             MouseTexture = new Texture2D[1];
             MouseTexture[0] = t2dMouseIcon;
 
-            m_Rectangle = new Rectangle();
+            m_Rectangle = new Rectangle(0, 0, 4, 4);
             DisplayMouse = true;
         }
         /// <summary>(Internal - Input Manager) Called Inside the built-in Input Manager however may be instantiated and called if not using</summary>
