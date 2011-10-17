@@ -120,6 +120,7 @@
     <Compile Include="Sprites\Font2D.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="UI\BaseMenuScreen.cs" />
+    <Compile Include="UI\ImageButton.cs" />
     <Compile Include="UI\TextButton.cs" />
     <Compile Include="UI\MenuManager.cs" />
   </ItemGroup>

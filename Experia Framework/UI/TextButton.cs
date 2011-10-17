@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Experia.Framework.Controls;
 
 namespace Experia.Framework.UI
@@ -18,6 +13,7 @@ namespace Experia.Framework.UI
         protected Color m_OriginalColor;
         public bool EnableFontShadow;
         public Color HoverColor;
+        public Color ShadowColor;
         public string Text
         {
             get { return m_Text;}
@@ -39,11 +35,12 @@ namespace Experia.Framework.UI
             get { return m_Position; }
             set
             {
-                m_Position = value;
+                m_Position.X = (int)value.X;
+                m_Position.Y = (int)value.Y;
                 m_Rectangle.X = (int)(value.X - m_Font.Origin.X);
                 m_Rectangle.Y = (int)(value.Y - m_Font.Origin.Y);
-                m_ShadowPosition.X = value.X + 3.0f;
-                m_ShadowPosition.Y = value.Y + 5.0f;
+                m_ShadowPosition.X = value.X + 1.0f;
+                m_ShadowPosition.Y = value.Y + 2.0f;
             }
         }
         public bool Clicked
@@ -74,9 +71,14 @@ namespace Experia.Framework.UI
             Text = text;
             m_OriginalColor = font.Color;
             HoverColor = Color.Red;
+            ShadowColor = new Color(0, 0, 0, 127);
         }
         public void Draw(GraphicsManager graphics)
         {
+            if (EnableFontShadow)
+            {
+                m_Font.Draw(graphics.SpriteBatch, m_Text, m_ShadowPosition, ShadowColor);
+            }
             m_Font.Draw(graphics.SpriteBatch, m_Text, m_Position);
         }
     }
