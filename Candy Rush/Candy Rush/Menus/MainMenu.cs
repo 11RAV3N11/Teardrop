@@ -13,6 +13,7 @@ namespace CandyRush
     {
         Font2D m_MenuFont;
         TextButton[] m_Buttons;
+        ImageButton m_ImgButton;
         public MainMenu()
         {
             m_Buttons = new TextButton[3];
@@ -23,18 +24,22 @@ namespace CandyRush
             {
                 m_Buttons[i] = new TextButton(m_MenuFont, "New Game");
             }
-
+            Texture2D temp = ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Zombie");
+            m_ImgButton = new ImageButton(temp , new Vector2(10f, 10f));
             m_Buttons[0].Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(50f, 50f));
         }
         public override void Update()
         {
             if (m_Buttons[0].Clicked)
                 throw new Exception("Item Clicked!");
+            if (m_ImgButton.Clicked)
+                throw new Exception("Ricardo Clicked!");
         }
 
         public override void Draw(GraphicsManager graphics)
         {
             m_Buttons[0].Draw(graphics);
+            m_ImgButton.Draw(graphics);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace CandyRush
         public override void Draw(GraphicsManager graphics)
         {
             graphics.SpriteBatch.Begin();
-            Sprite.Draw(graphics.SpriteBatch, Sprite);
+            Sprite.Draw(graphics.SpriteBatch);
             graphics.SpriteBatch.End();
         }
     }
