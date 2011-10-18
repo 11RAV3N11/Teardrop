@@ -26,7 +26,7 @@ namespace CandyRush
             }
             Texture2D temp = ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Zombie");
             m_ImgButton = new ImageButton(temp , new Vector2(10f, 10f));
-            m_Buttons[0].Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(50f, 50f));
+            m_Buttons[0].Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(75f, 20f));
         }
         public override void Update()
         {
