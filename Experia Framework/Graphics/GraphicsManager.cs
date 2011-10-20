@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +33,7 @@ namespace Experia.Framework
 
         public void EnableSprites()
         {
-            if(SpriteBatch == null)
+            if (SpriteBatch == null)
                 SpriteBatch = new SpriteBatch(m_GraphicsDeviceManager.GraphicsDevice);
         }
         public void ScreenResolution(Vector2 v2Resolution)

@@ -5,24 +5,32 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experia Framework", "Experi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy Rush", "Candy Rush\Candy Rush\Candy Rush.csproj", "{B76E99CD-75AB-4414-96F1-22295718AAC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy RushContent", "Candy Rush\Candy RushContent\Candy RushContent.contentproj", "{96C9EEFA-2D9C-4785-9FB1-94B0B6A4E125}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "CandyRush Content", "CandyRush Content\CandyRush Content.contentproj", "{87D7C410-544B-40EB-80D8-40FE2D02E4B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{950919B6-63A1-43C8-8118-A8B401F3C411}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{950919B6-63A1-43C8-8118-A8B401F3C411}.Debug|x86.ActiveCfg = Debug|x86
 		{950919B6-63A1-43C8-8118-A8B401F3C411}.Debug|x86.Build.0 = Debug|x86
+		{950919B6-63A1-43C8-8118-A8B401F3C411}.Release|Any CPU.ActiveCfg = Release|x86
 		{950919B6-63A1-43C8-8118-A8B401F3C411}.Release|x86.ActiveCfg = Release|x86
 		{950919B6-63A1-43C8-8118-A8B401F3C411}.Release|x86.Build.0 = Release|x86
+		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Debug|x86.ActiveCfg = Debug|x86
 		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Debug|x86.Build.0 = Debug|x86
+		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Release|Any CPU.ActiveCfg = Release|x86
 		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Release|x86.ActiveCfg = Release|x86
 		{B76E99CD-75AB-4414-96F1-22295718AAC1}.Release|x86.Build.0 = Release|x86
-		{96C9EEFA-2D9C-4785-9FB1-94B0B6A4E125}.Debug|x86.ActiveCfg = Debug|x86
-		{96C9EEFA-2D9C-4785-9FB1-94B0B6A4E125}.Release|x86.ActiveCfg = Release|x86
+		{87D7C410-544B-40EB-80D8-40FE2D02E4B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D7C410-544B-40EB-80D8-40FE2D02E4B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{87D7C410-544B-40EB-80D8-40FE2D02E4B0}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D7C410-544B-40EB-80D8-40FE2D02E4B0}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
