@@ -2,14 +2,12 @@
 {
     public abstract class BaseMenuScreen
     {
-        public bool Active;
-        public readonly string KeyString;
-        public BaseMenuScreen(string KeyString)
+        public bool Display;
+        public BaseMenuScreen()
         {
-            this.KeyString = KeyString;
+            Display = true;
         }
-        public abstract void Initialize();
         public abstract void Update();
-        public abstract void Draw();
+        public abstract void Draw(GraphicsManager graphics);
     }
 }

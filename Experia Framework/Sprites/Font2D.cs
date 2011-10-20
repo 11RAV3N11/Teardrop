@@ -9,7 +9,8 @@ namespace Experia.Framework
 {
     public class Font2D
     {
-        SpriteFont m_Font;
+        protected readonly SpriteFont m_Font;
+        public SpriteFont Font { get { return m_Font; } }
         public Color Color;
         public float Rotation, Layer;
         public Vector2 Origin, Scale;
@@ -36,7 +37,15 @@ namespace Experia.Framework
         }
         public void Draw(SpriteBatch spriteBatch, string text, Vector2 position)
         {
+            position.X = (int)position.X;
+            position.Y = (int)position.Y; //<-- Resolves Kerning Bug
             spriteBatch.DrawString(m_Font, text, position, Color, Rotation, Origin, Scale, Effects, Layer);
+        }
+        public void Draw(SpriteBatch spriteBatch, string text, Vector2 position, Color color)
+        {
+            position.X = (int)position.X;
+            position.Y = (int)position.Y; //<-- Resolves Kerning Bug
+            spriteBatch.DrawString(m_Font, text, position, color, Rotation, Origin, Scale, Effects, Layer);
         }
 
     }

@@ -8,11 +8,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Experia.Framework
 {
     public delegate void GraphicsRebuildArgs(GraphicsManager graphics);
+    //Suppressing Code Review for IDisposable, only time something needs to be disposed is on app exit.
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public class GraphicsManager
     {
         public GraphicsDevice Device { get { return m_GraphicsDeviceManager.GraphicsDevice; } }
         public static GraphicsManager Instance { get { return Experia.Framework.Generics.Singleton<GraphicsManager>.Instance; } }
         public SpriteBatch SpriteBatch;
+        //Suppressing Analysis for Event Rebuild, does not match own design
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
         public event GraphicsRebuildArgs HookGraphicsRebuild;
         protected bool m_DeviceChanged;
         protected Vector2[] m_v2Resolutions;

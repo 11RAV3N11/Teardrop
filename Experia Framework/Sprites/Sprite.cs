@@ -9,24 +9,55 @@ namespace Experia.Framework
 {
     public class Sprite
     {
-        public Texture2D Texture;
-        public Vector2 Position, Origin, Scale;
+        public Vector2 Origin, Scale;
         public float Rotation, Layer;
-        public BoundingBox BoundingBox;
         public Color Color;
         public SpriteEffects SpriteEffects;
+        protected Vector2 m_Position;
+        protected Rectangle m_Bounds;
+        public Vector2 Position
+        {
+            get { return m_Position; }
+            set
+            {
+                m_Position.X = (int)value.X;
+                m_Position.Y = (int)value.Y;
+                m_Bounds.X = (int)value.X;
+                m_Bounds.Y = (int)value.Y;
+            }
+        }
+        protected Texture2D m_Texture;
+        public Texture2D Texture
+        {
+            get
+            {
+                return m_Texture;
+            }
+            set
+            {
+                m_Texture = value;
+                m_Bounds = value.Bounds;
+            }
+        }
+        public Rectangle BoundingRectangle
+        {
+            get
+            {
+                return m_Bounds;
+            }
+        }
 
         public Sprite()
         {
             Scale = Vector2.One;
             Color = Color.White;
             SpriteEffects = SpriteEffects.None;
-            BoundingBox = new BoundingBox();
+            m_Bounds = new Rectangle();
         }
-        public static void Draw(SpriteBatch spriteBatch, Sprite sprite)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if(sprite.Texture != null)
-            spriteBatch.Draw(sprite.Texture, sprite.Position, null, sprite.Color, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.SpriteEffects, sprite.Layer);
+            if (m_Texture != null)
+                spriteBatch.Draw(m_Texture, Position, null, Color, Rotation, Origin, Scale, SpriteEffects, Layer);
         }
     }
 }

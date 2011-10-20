@@ -1,6 +1,12 @@
 Content\Zombie.xnb
 Content\Maru.xnb
+Content\pumpkin.xnb
 Content\Chiller.xnb
+<<<<<<< HEAD
 Content\slats.xnb
 Content\gunshot.xnb
+=======
+Content\gunshot.xnb
+Content\slats.xnb
+>>>>>>> upstream/master
 Content\slats.wma
