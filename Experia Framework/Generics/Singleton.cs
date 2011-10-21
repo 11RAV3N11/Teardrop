@@ -14,7 +14,7 @@ namespace Experia.Framework.Generics
         private static volatile T m_Instance;
         private static object m_Lock = new object();
 
-        static Singleton() { /*No Body Needed; however we need to make this static for protection*/ }
+        static Singleton() { /*No Body Needed*/ }
 
         public static T Instance
         {

@@ -35,7 +35,7 @@ namespace CandyRush
             GraphicsManager.Instance.EnableSprites();
             MenuManager.Instance.CreateInstance<MainMenu>("Main Menu");
             InputManager.Instance.EnableMouse(Content.Load<Texture2D>(ContentContainer.Engine, @"Content\\pumpkin"), true);
-            FileIO.Instance.CreateHardwareProfile();
+            FileIO.Instance.CreateHardwareProfile(GraphicsManager.Instance.Device);
             base.Initialize();
         }
 
