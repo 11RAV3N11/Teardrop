@@ -32,8 +32,8 @@ namespace CandyRush
         /// </summary>
         protected override void Initialize()
         {
+            GraphicsManager.Instance.ScreenResolution(new Vector2(1280f, 720f));
             GraphicsManager.Instance.EnableSprites();
-            MenuManager.Instance.CreateInstance<MainMenu>("Main Menu");
             InputManager.Instance.EnableMouse(Content.Load<Texture2D>(ContentContainer.Engine, @"Content\\pumpkin"), true);
             FileIO.Instance.CreateHardwareProfile(GraphicsManager.Instance.Device);
             base.Initialize();
@@ -63,6 +63,7 @@ namespace CandyRush
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            GraphicsManager.Instance.Update();
             InputManager.Instance.Update(GraphicsManager.Instance.Device.Viewport.Bounds);
             if (m_GameStarted)
             {
@@ -72,6 +73,7 @@ namespace CandyRush
             else
             {
                 EntityManager.Instance.Initialize(GraphicsManager.Instance);
+                MenuManager.Instance.CreateInstance<MainMenu>("Main Menu");
                 m_GameStarted = true;
             }
                 // TODO: Add your update logic here

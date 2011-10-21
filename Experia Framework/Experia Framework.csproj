@@ -105,11 +105,11 @@
     <Compile Include="Enumerators.cs" />
     <Compile Include="ExperiaCore.cs" />
     <Compile Include="ExperiaHelper.cs" />
+    <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="IO\FileIO.cs" />
     <Compile Include="Generics\Singleton.cs" />
     <Compile Include="Graphics\Primitive2D.cs" />
     <Compile Include="Input\GamePadExtension.cs" />
-    <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Input\KeyboardExtension.cs" />
     <Compile Include="Input\MouseExtension.cs" />

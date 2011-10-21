@@ -107,10 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CandyRushGame.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="CandyRushGame.cs" />
     <Compile Include="Zombie.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,13 +118,14 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CandyRush Content\CandyRush Content.contentproj">
+      <Project>{87D7C410-544B-40EB-80D8-40FE2D02E4B0}</Project>
+      <Name>CandyRush Content</Name>
+      <XnaReferenceType>Content</XnaReferenceType>
+    </ProjectReference>
     <ProjectReference Include="..\..\Experia Framework\Experia Framework.csproj">
       <Project>{950919B6-63A1-43C8-8118-A8B401F3C411}</Project>
       <Name>Experia Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Candy RushContent\Candy RushContent.contentproj">
-      <Name>Candy_RushContent</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
