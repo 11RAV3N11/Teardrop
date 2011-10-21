@@ -10,34 +10,34 @@ namespace Experia.Framework.UI
 {
     public class ImageButton
     {
-        protected Sprite m_Sprite;
+        public Sprite Sprite;
         public ImageButton(Texture2D buttonTexture, Vector2 percentPosition)
         {
-            m_Sprite = new Sprite();
-            m_Sprite.Texture = buttonTexture;
-            m_Sprite.Position = ExperiaHelper.Instance.PositionByResolution(percentPosition);
+            Sprite = new Sprite();
+            Sprite.Texture = buttonTexture;
+            Sprite.Position = ExperiaHelper.Instance.PositionByResolution(percentPosition);
         }
         public bool Clicked
         {
             get
             {
-                if (InputManager.Instance.Mouse.BoundingRectangle.Intersects(m_Sprite.BoundingRectangle))
+                if (InputManager.Instance.Mouse.BoundingRectangle.Intersects(Sprite.BoundingRectangle))
                 {
                     //Hover Logic
-                    m_Sprite.Color = Color.Red;
+                    Sprite.Color = Color.Red;
                     if (InputManager.Instance.Mouse.CheckMouseButtonPressed(MouseButton.LeftButton))
                     {
                         return true;
                     }
                     return false;
                 }
-                m_Sprite.Color = Color.White;
+                Sprite.Color = Color.White;
                 return false;
             }
         }
         public void Draw(GraphicsManager graphics)
         {
-            m_Sprite.Draw(graphics.SpriteBatch);
+            Sprite.Draw(graphics.SpriteBatch);
         }
     }
 }

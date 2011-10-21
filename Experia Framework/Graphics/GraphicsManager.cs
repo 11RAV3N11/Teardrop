@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +33,7 @@ namespace Experia.Framework
 
         public void EnableSprites()
         {
-            if(SpriteBatch == null)
+            if (SpriteBatch == null)
                 SpriteBatch = new SpriteBatch(m_GraphicsDeviceManager.GraphicsDevice);
         }
         public void ScreenResolution(Vector2 v2Resolution)
@@ -43,7 +43,7 @@ namespace Experia.Framework
             m_PresentationParams.BackBufferHeight = (int)v2Resolution.Y;
             m_DeviceChanged = true;
         }
-        public void BufferResolution(Vector2 v2Resolution)
+        public void SpriteResolution(Vector2 v2Resolution)
         {
             m_v2Resolutions[1] = v2Resolution;
             m_DeviceChanged = true;
@@ -84,7 +84,8 @@ namespace Experia.Framework
         {
             if (m_DeviceChanged)
             {
-
+                m_GraphicsDeviceManager.PreferredBackBufferWidth = m_PresentationParams.BackBufferWidth;
+                m_GraphicsDeviceManager.PreferredBackBufferHeight = m_PresentationParams.BackBufferHeight;
                 m_GraphicsDeviceManager.ApplyChanges();
 
                 if (HookGraphicsRebuild != null)

@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Experia.Framework.Audio
@@ -6,7 +6,7 @@ namespace Experia.Framework.Audio
     public class AudioEffect
     {
         protected SoundEffect m_SoundEffect = null;
-        protected SoundEffectInstance m_SoundEffectInstance = null;
+        protected SoundEffectInstance m_SoundEffectInstance = null;        
 
         public void LoadAudioEffect(string Location, ContentContainer container)
         {
@@ -19,8 +19,8 @@ namespace Experia.Framework.Audio
         /// </summary>
         public void PlayAudioEffect()
         {
-            if (m_SoundEffectInstance.State != SoundState.Playing)
-                m_SoundEffectInstance.Play();
+            if ( m_SoundEffectInstance.State != SoundState.Playing)
+                 m_SoundEffectInstance.Play();
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Experia.Framework.Audio
         /// </summary>
         public void StopAudioEffect()
         {
-            if (m_SoundEffectInstance.State == SoundState.Playing || m_SoundEffectInstance.State == SoundState.Paused)
-                m_SoundEffectInstance.Stop();
+            if ( m_SoundEffectInstance.State == SoundState.Playing ||  m_SoundEffectInstance.State == SoundState.Paused)
+                 m_SoundEffectInstance.Stop();
         }
 
         public float Volume
