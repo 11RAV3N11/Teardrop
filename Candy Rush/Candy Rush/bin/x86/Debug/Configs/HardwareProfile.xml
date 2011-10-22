@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Machine HWGUID="00001200-0003-b327-2a00-032700064e54">
+  <OS Is64Bit="True">Microsoft Windows NT 6.1.7601 Service Pack 1</OS>
+  <Processor Count="3" Clock="3153" MaxClock="3153" L2="1536" L3="6144">AMD Phenom(tm) II X3 720 Processor</Processor>
+  <RAM Bytes="4294107136" />
+  <Network ComputerName="ANDREW-PC" UserName="Andrew">
+    <Adapter Name="Broadcom 802.11g Network Adapter" Speed="54000000" MAC="001A70A4B21F" />
+    <Adapter Name="Software Loopback Interface 1" Speed="1073741824" MAC="" />
+    <Adapter Name="Teredo Tunneling Pseudo-Interface" Speed="100000" MAC="00000000000000E0" />
+  </Network>
+  <GPU ID="4608" VendorID="4318" SystemID="891098200" Revision="161" HiDefCapable="True">NVIDIA GeForce GTX 560 Ti</GPU>
+  <DesktopResolution X="1680" Y="1050" />
+</Machine>
