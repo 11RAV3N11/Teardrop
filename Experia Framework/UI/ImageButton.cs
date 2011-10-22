@@ -8,48 +8,52 @@ using Experia.Framework.Controls;
 
 namespace Experia.Framework.UI
 {
-    public class ImageButton
+    public class ImageButton: Sprite
     {
-        protected Sprite m_Sprite;
-        public Sprite Sprite
-        {
-            get { return m_Sprite; }
-            set
-            {
-                m_Sprite = value;
-                m_OriginalSpriteColor = m_Sprite.Color;
-            }
-        }
         public Color HoverColor;
         protected Color m_OriginalSpriteColor;
+        protected Vector2 m_PercentPosition;
         public ImageButton(Texture2D buttonTexture, Vector2 position)
         {
-            Sprite = new Sprite();
-            Sprite.Texture = buttonTexture;
+            base.Texture = buttonTexture;
+            base.Position = position;
             HoverColor = Color.Red;
-            Sprite.Position = position;
+            m_OriginalSpriteColor = base.Color;
+        }
+        public ImageButton(Texture2D buttonTexture, float percentX, float percentY)
+        {
+            base.Texture = buttonTexture;
+            base.Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(percentX, percentY));
+            HoverColor = Color.Red;
+            m_OriginalSpriteColor = base.Color;
+            m_PercentPosition = new Vector2(percentX, percentY);
+            GraphicsManager.Instance.HookGraphicsRebuild += new GraphicsManager.GraphicsRebuildArgs(m_UpdatePositionByResolution);
+        }
+        protected void m_UpdatePositionByResolution(GraphicsManager graphics)
+        {
+            base.Position = ExperiaHelper.Instance.PositionByResolution(m_PercentPosition);
         }
         public bool Clicked
         {
             get
             {
-                if (InputManager.Instance.Mouse.BoundingRectangle.Intersects(Sprite.BoundingRectangle))
+                if (InputManager.Instance.Mouse.BoundingRectangle.Intersects(base.BoundingRectangle))
                 {
                     //Hover Logic
-                    Sprite.Color = HoverColor;
+                    base.Color = HoverColor;
                     if (InputManager.Instance.Mouse.CheckMouseButtonPressed(MouseButton.LeftButton))
                     {
                         return true;
                     }
                     return false;
                 }
-                Sprite.Color = m_OriginalSpriteColor;
+                base.Color = m_OriginalSpriteColor;
                 return false;
             }
         }
         public void Draw(GraphicsManager graphics)
         {
-            Sprite.Draw(graphics.SpriteBatch);
+            base.Draw(graphics.SpriteBatch);
         }
     }
 }

@@ -22,7 +22,9 @@ namespace CandyRush
         {
             ContentLoader.Instance.Initialize(this);
             GraphicsManager.Instance.Initialize(this);
-            GraphicsManager.Instance.ScreenResolution = new Vector2(1280f, 720f);
+            GraphicsManager.Instance.ScreenResolution = new Vector2(1680f, 1050f);
+            GraphicsManager.Instance.SpriteResolution = new Vector2(1280f, 720f);
+            GraphicsManager.Instance.EnableFullScreen = true;
         }
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace CandyRush
             GraphicsManager.Instance.EnableSprites();
             InputManager.Instance.EnableMouse(Content.Load<Texture2D>(ContentContainer.Engine, @"Content\\pumpkin"), true);
             FileIO.Instance.CreateHardwareProfile(GraphicsManager.Instance.Device);
-            GameStateManager.Instance.ChangeState(GameState.PlayingGame);
+            GameStateManager.Instance.ChangeState(GameState.InFullScreenMenu);
             base.Initialize();
         }
 
@@ -46,7 +48,9 @@ namespace CandyRush
         /// </summary>
         protected override void LoadContent()
         {
-            MenuManager.Instance.AddMenu<MainMenu>("Main Menu");
+            MenuManager.Instance.AddMenu<MainMenu>("Main", true);
+            MenuManager.Instance.AddMenu<PlayMenu>("Play", false);
+            MenuManager.Instance.AddMenu<OptionsMenu>("Options", false);
 
             //Assembly currentAssembly = Assembly.GetExecutingAssembly();
             var a = Activator.CreateInstance("Candy Rush", "CandyRush.Zombie");
@@ -88,11 +92,11 @@ namespace CandyRush
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Graphics.ClearBackbuffer();
-            GraphicsManager.Instance.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise);
+            Graphics.BeginSpriteDraw();
             GameStateManager.Instance.Draw(Graphics);
             WorldManager.Instance.Draw(Graphics);
             InputManager.Instance.Mouse.Draw(GraphicsManager.Instance);
-            GraphicsManager.Instance.SpriteBatch.End();
+            Graphics.EndSpriteDraw();
             base.Draw(gameTime);
         }
     }

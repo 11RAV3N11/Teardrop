@@ -16,7 +16,7 @@ namespace Experia.Framework
             PercentPosition.X = MathHelper.Clamp(PercentPosition.X, 0f, 100f);
             PercentPosition.Y = MathHelper.Clamp(PercentPosition.Y, 0f, 100f);
 
-            Vector2 resolution = new Vector2(GraphicsManager.Instance.Device.Viewport.Width, GraphicsManager.Instance.Device.Viewport.Height);
+            Vector2 resolution = GraphicsManager.Instance.SpriteResolution;
 
             Vector2 targetPosition = new Vector2();
             targetPosition.X = (PercentPosition.X / 100f) * resolution.X;

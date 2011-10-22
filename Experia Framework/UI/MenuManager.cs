@@ -10,9 +10,24 @@ namespace Experia.Framework.UI
         {
             m_Menus = new Dictionary<string, BaseMenuScreen>();
         }
-        public T AddMenu<T>(string menuName) where T : BaseMenuScreen, new()
+        public void SwitchMenu(string menuName)
+        {
+            foreach (KeyValuePair<string, BaseMenuScreen> kvp in m_Menus)
+            {
+                if (kvp.Key != menuName)
+                {
+                    m_Menus[kvp.Key].Display = false;
+                }
+                else if (kvp.Key == menuName)
+                {
+                    m_Menus[kvp.Key].Display = true;
+                }
+            }
+        }
+        public T AddMenu<T>(string menuName, bool visible) where T : BaseMenuScreen, new()
         {
             BaseMenuScreen temp = new T();
+            temp.Display = visible;
 
             m_Menus.Add(menuName, temp);
             return (T)m_Menus[menuName];

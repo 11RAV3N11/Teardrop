@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +9,19 @@ using Experia.Framework.UI;
 
 namespace CandyRush
 {
-    public class MainMenu : BaseMenuScreen
+    class PlayMenu : BaseMenuScreen
     {
-        public Sprite m_Background;
-        public Sprite m_Moon;
-        public Sprite m_Grave;
-        public Sprite m_Pumpkin;
-        public Sprite m_Title;
+        protected Sprite m_Background;
+        protected Sprite m_Moon;
+        protected Sprite m_Grave;
+        protected Sprite m_Pumpkin;
+        protected Sprite m_Title;
 
-        public ImageButton m_PlayImage;
-        public ImageButton m_OptionsImage;
-        public ImageButton m_CreditsImage;
-        public ImageButton m_ExitImage;
+        protected ImageButton m_NewGame;
+        protected ImageButton m_Continue;
+        protected ImageButton m_Back;
 
-        public MainMenu()
+        public PlayMenu()
         {
             m_Background = new Sprite();
             m_Background.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Background");
@@ -44,36 +43,29 @@ namespace CandyRush
             m_Title.Position = ExperiaHelper.Instance.PositionByResolution(new Vector2(5.0f, 5.0f));
 
 
-            m_PlayImage = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Play"),
-                ExperiaHelper.Instance.PositionByResolution(new Vector2(68f, 30f)));
-            m_OptionsImage = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Options"),
-                ExperiaHelper.Instance.PositionByResolution(new Vector2(62.0f, 45.0f)));
-            m_CreditsImage = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Credits"),
-                ExperiaHelper.Instance.PositionByResolution(new Vector2(63.0f, 62.0f)));
-            m_ExitImage = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Exit"),
-                ExperiaHelper.Instance.PositionByResolution(new Vector2(67.0f, 79.0f)));
+            m_NewGame = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\NewGame"),
+                ExperiaHelper.Instance.PositionByResolution(new Vector2(60f, 38f)));
+            m_Continue = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Continue"),
+                ExperiaHelper.Instance.PositionByResolution(new Vector2(60.0f, 54.0f)));
+            m_Back = new ImageButton(ContentLoader.Instance.Load<Texture2D>(ContentContainer.UI, @"Content\\Graphics\\Back"),
+                ExperiaHelper.Instance.PositionByResolution(new Vector2(66.0f, 68.0f)));
         }
 
         public override void Update()
         {
-            if (m_PlayImage.Clicked)
-            {
-                MenuManager.Instance.SwitchMenu("Play");
-            }
-
-            if (m_OptionsImage.Clicked)
-            {
-                MenuManager.Instance.SwitchMenu("Options");
-            }
-
-            if (m_CreditsImage.Clicked)
+            if (m_NewGame.Clicked)
             {
                 //to implement
             }
 
-            if (m_ExitImage.Clicked)
+            if (m_Continue.Clicked)
             {
-                GameStateManager.Instance.ExitGame();
+                //to implement
+            }
+
+            if (m_Back.Clicked)
+            {
+                MenuManager.Instance.SwitchMenu("Main");
             }
         }
 
@@ -85,10 +77,9 @@ namespace CandyRush
             m_Grave.Draw(graphics.SpriteBatch);
             m_Title.Draw(graphics.SpriteBatch);
 
-            m_PlayImage.Draw(graphics);
-            m_OptionsImage.Draw(graphics);
-            m_CreditsImage.Draw(graphics);
-            m_ExitImage.Draw(graphics);
+            m_NewGame.Draw(graphics);
+            m_Continue.Draw(graphics);
+            m_Back.Draw(graphics);
         }
     }
 }

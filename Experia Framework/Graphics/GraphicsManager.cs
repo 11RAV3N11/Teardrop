@@ -18,14 +18,39 @@ namespace Experia.Framework
         /*********************************************************************/
         public SpriteBatch SpriteBatch;
         public Color BackBufferColor;
-        public event GraphicsRebuildArgs HookGraphicsRebuild;
+        public event GraphicsRebuildArgs HookGraphicsRebuild
+        {
+            add
+            {
+                m_HookGraphicsRebuild += value;
+                m_DeviceChanged = true;
+            }
+
+            remove
+            {
+                m_HookGraphicsRebuild -= value;
+            }
+        }
+        public bool EnableFullScreen
+        {
+            get
+            {
+                return m_GraphicsDeviceManager.IsFullScreen;
+            }
+            set
+            {
+                m_GraphicsDeviceManager.IsFullScreen = value;
+            }
+        }
         /*********************************************************************/
         protected bool m_DeviceChanged;
+        protected event GraphicsRebuildArgs m_HookGraphicsRebuild;
         protected Vector2[] m_v2Resolutions;
         protected PresentationParameters m_PresentationParams;
         protected GraphicsDeviceManager m_GraphicsDeviceManager;
         protected Color m_backBufferStockColor = Color.CornflowerBlue;
         protected Color m_renderTargetStockColor = Color.Purple;
+        protected Matrix m_SpriteScale;
         /*********************************************************************/
         protected GraphicsManager() { }
 
@@ -39,7 +64,28 @@ namespace Experia.Framework
             m_DeviceChanged = true;
             BackBufferColor = Color.CornflowerBlue;
         }
-
+        public void BeginSpriteDraw()
+        {
+            SpriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.AnisotropicClamp,
+                DepthStencilState.Default,
+                RasterizerState.CullCounterClockwise,
+                null, m_SpriteScale);
+        }
+        public void BeginSpriteDraw(BlendState blendState)
+        {
+            SpriteBatch.Begin(SpriteSortMode.Deferred,
+                blendState,
+                SamplerState.AnisotropicClamp,
+                DepthStencilState.Default,
+                RasterizerState.CullCounterClockwise,
+                null, m_SpriteScale);
+        }
+        public void EndSpriteDraw()
+        {
+            SpriteBatch.End();
+        }
         /// <summary>Prepares and sets up the SpriteBatch - Call in your Initialize Method</summary>
         public void EnableSprites()
         {
@@ -58,14 +104,24 @@ namespace Experia.Framework
                 m_v2Resolutions[0].Y = value.Y;
 
                 m_PresentationParams.BackBufferWidth = (int)value.X;
-                m_PresentationParams.BackBufferHeight = (int)value.Y;
-                m_DeviceChanged = true;
+                m_PresentationParams.BackBufferHeight = (int)value.Y; 
+
+                m_GraphicsDeviceManager.PreferredBackBufferWidth = m_PresentationParams.BackBufferWidth;
+                m_GraphicsDeviceManager.PreferredBackBufferHeight = m_PresentationParams.BackBufferHeight;
+                m_GraphicsDeviceManager.ApplyChanges();
             }
         }
-        public void SpriteResolution(Vector2 v2Resolution)
+        public Vector2 SpriteResolution
         {
-            m_v2Resolutions[1] = v2Resolution;
-            m_DeviceChanged = true;
+            get
+            {
+                return m_v2Resolutions[1];
+            }
+            set
+            {
+                m_v2Resolutions[1] = value;
+                m_DeviceChanged = true;
+            }
         }
         public void AntiAliasing(AntiAliasingFlags aaType, bool bEnabled)
         {
@@ -107,13 +163,12 @@ namespace Experia.Framework
         {
             if (m_DeviceChanged)
             {
-                m_GraphicsDeviceManager.PreferredBackBufferWidth = m_PresentationParams.BackBufferWidth;
-                m_GraphicsDeviceManager.PreferredBackBufferHeight = m_PresentationParams.BackBufferHeight;
-                m_GraphicsDeviceManager.ApplyChanges();
+                Vector2 screenScale = m_v2Resolutions[0] / m_v2Resolutions[1] ;
+                m_SpriteScale = Matrix.CreateScale(screenScale.X, screenScale.Y, 1.0f);
 
-                if (HookGraphicsRebuild != null)
+                if (m_HookGraphicsRebuild != null)
                 {
-                    HookGraphicsRebuild.Invoke(this);
+                    m_HookGraphicsRebuild.Invoke(this);
                 }
 
 

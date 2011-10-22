@@ -109,6 +109,8 @@
   <ItemGroup>
     <Compile Include="CandyRushGame.cs" />
     <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\OptionsMenu.cs" />
+    <Compile Include="Menus\PlayMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Zombie.cs" />
