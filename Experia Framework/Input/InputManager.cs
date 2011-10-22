@@ -44,9 +44,9 @@ namespace Experia.Framework
                 Keyboard = new KeyboardExtension();
             }
         }
-        public void Update(Rectangle windowBounds)
+        public void Update(Viewport viewport)
         {
-            Mouse.Update(windowBounds);
+            Mouse.Update(viewport.Bounds);
             Keyboard.Update();
 
             if (m_EnableGamePad)

@@ -97,14 +97,15 @@
   <ItemGroup>
     <Compile Include="Content\AsyncContentManager.cs" />
     <Compile Include="Content\ContentLoader.cs" />
-    <Compile Include="Core\GameManager.cs" />
+    <Compile Include="Core\WorldManager.cs" />
     <Compile Include="Entities\BaseDrawableGameEntity2D.cs" />
     <Compile Include="Entities\BaseDrawableGameEntity3D.cs" />
     <Compile Include="Entities\BaseGameEntity.cs" />
     <Compile Include="Entities\EntityManager.cs" />
-    <Compile Include="Enumerators.cs" />
-    <Compile Include="ExperiaCore.cs" />
-    <Compile Include="ExperiaHelper.cs" />
+    <Compile Include="Generics\Enumerators.cs" />
+    <Compile Include="Core\EngineCore.cs" />
+    <Compile Include="Core\ExperiaHelper.cs" />
+    <Compile Include="Core\GameStateManager.cs" />
     <Compile Include="Graphics\GraphicsManager.cs" />
     <Compile Include="IO\FileIO.cs" />
     <Compile Include="Generics\Singleton.cs" />

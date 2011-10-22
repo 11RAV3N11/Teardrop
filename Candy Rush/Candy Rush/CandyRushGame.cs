@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Reflection;
 using Experia.Framework;
 using Experia.Framework.UI;
 
@@ -16,12 +17,12 @@ namespace CandyRush
     /// <summary>This is the main type for your game</summary>
     public class CandyRushGame: EngineCore
     {
-        bool m_GameStarted = false;
-
+        
         public CandyRushGame(): base(EngineFlags.Debug | EngineFlags.MultiCore)
         {
             ContentLoader.Instance.Initialize(this);
             GraphicsManager.Instance.Initialize(this);
+            GraphicsManager.Instance.ScreenResolution = new Vector2(1280f, 720f);
         }
 
         /// <summary>
@@ -32,10 +33,10 @@ namespace CandyRush
         /// </summary>
         protected override void Initialize()
         {
-            GraphicsManager.Instance.ScreenResolution(new Vector2(1280f, 720f));
             GraphicsManager.Instance.EnableSprites();
             InputManager.Instance.EnableMouse(Content.Load<Texture2D>(ContentContainer.Engine, @"Content\\pumpkin"), true);
             FileIO.Instance.CreateHardwareProfile(GraphicsManager.Instance.Device);
+            GameStateManager.Instance.ChangeState(GameState.PlayingGame);
             base.Initialize();
         }
 
@@ -45,6 +46,15 @@ namespace CandyRush
         /// </summary>
         protected override void LoadContent()
         {
+            MenuManager.Instance.AddMenu<MainMenu>("Main Menu");
+
+            //Assembly currentAssembly = Assembly.GetExecutingAssembly();
+            var a = Activator.CreateInstance("Candy Rush", "CandyRush.Zombie");
+            EntityManager.Instance.AddGameEntity(a.Unwrap());
+            EntityManager.Instance.DrawableGameObjects[0].Sprite.Position = new Vector2(200f, 100f);
+            //Type
+
+            EntityManager.Instance.LoadEntities(GraphicsManager.Instance);
         }
 
         /// <summary>
@@ -64,20 +74,9 @@ namespace CandyRush
         protected override void Update(GameTime gameTime)
         {
             GraphicsManager.Instance.Update();
-            InputManager.Instance.Update(GraphicsManager.Instance.Device.Viewport.Bounds);
-            if (m_GameStarted)
-            {
-                EntityManager.Instance.Update();
-                MenuManager.Instance.Update();
-            }
-            else
-            {
-                EntityManager.Instance.Initialize(GraphicsManager.Instance);
-                MenuManager.Instance.CreateInstance<MainMenu>("Main Menu");
-                m_GameStarted = true;
-            }
-                // TODO: Add your update logic here
-
+            InputManager.Instance.Update(GraphicsManager.Instance.Device.Viewport);
+            GameStateManager.Instance.Update(this);
+            WorldManager.Instance.Update();
             base.Update(gameTime);
         }
 
@@ -87,9 +86,11 @@ namespace CandyRush
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            GraphicsManager.Instance.SpriteBatch.Begin();
-            MenuManager.Instance.Draw(GraphicsManager.Instance);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
+            Graphics.ClearBackbuffer();
+            GraphicsManager.Instance.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise);
+            GameStateManager.Instance.Draw(Graphics);
+            WorldManager.Instance.Draw(Graphics);
             InputManager.Instance.Mouse.Draw(GraphicsManager.Instance);
             GraphicsManager.Instance.SpriteBatch.End();
             base.Draw(gameTime);

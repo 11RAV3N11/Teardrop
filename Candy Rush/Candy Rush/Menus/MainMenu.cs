@@ -47,7 +47,7 @@ namespace CandyRush
 
             if (m_ExitImage.Clicked)
             {
-                //to implement
+                GameStateManager.Instance.ExitGame();
             }
 
         }
