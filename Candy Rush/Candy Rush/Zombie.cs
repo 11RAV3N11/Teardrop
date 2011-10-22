@@ -12,6 +12,7 @@ namespace CandyRush
         {
             if(Sprite.Texture == null)
             Sprite.Texture = ContentLoader.Instance.Load<Texture2D>(ContentContainer.Game, @"Content\\Zombie");
+            base.Initialize(graphics);
         }
         public override void Update()
         {
@@ -20,9 +21,7 @@ namespace CandyRush
         }
         public override void Draw(GraphicsManager graphics)
         {
-            graphics.SpriteBatch.Begin();
             Sprite.Draw(graphics.SpriteBatch);
-            graphics.SpriteBatch.End();
         }
     }
 }

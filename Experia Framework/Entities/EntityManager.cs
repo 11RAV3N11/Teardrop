@@ -41,7 +41,7 @@ namespace Experia.Framework
 
         }
 
-        public void Initialize(GraphicsManager graphicsPacket)
+        public void LoadEntities(GraphicsManager graphicsPacket)
         {
             for (int i = 0; i < GameObjects.Count; i++)
             {

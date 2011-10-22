@@ -37,6 +37,8 @@ namespace Experia.Framework
             {
                 m_Texture = value;
                 m_Bounds = value.Bounds;
+                m_Bounds.X = (int)m_Position.X;
+                m_Bounds.Y = (int)m_Position.Y;
             }
         }
         public Rectangle BoundingRectangle

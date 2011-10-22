@@ -28,6 +28,15 @@ namespace Experia.Framework
             m_Paths.Add(ExperiaFiles.UserSettings, m_Directories[ExperiaDirectories.Configs] + "UserSettings.xml");
         }
 
+        public XmlWriter XmlWriterCreateInstance(out XmlWriter writer, string xmlNameAndLocation, string xmlHeadTag)
+        {
+            writer = XmlWriter.Create(xmlNameAndLocation);
+
+            writer.WriteStartElement(xmlHeadTag);
+
+            return writer;
+        }
+
         public void XmlWriteElement(XmlWriter writer, string tag, string value)
         {
             writer.WriteStartElement(tag);
@@ -148,6 +157,7 @@ namespace Experia.Framework
         /// <param name="graphics">GraphicsDevice so that we can easily probe for the GPU</param>
         public void CreateHardwareProfile(GraphicsDevice graphics)
         {
+            
             //Check to see if the Tree structure has been setup
             if (!Directory.Exists(m_Directories[ExperiaDirectories.Configs]))
             {
@@ -156,10 +166,36 @@ namespace Experia.Framework
 
             XmlWriterSettings settings = new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true };
 
-            //This takes a bit so lets makesure we even need to create this doc
-            //if (!File.Exists(m_Paths[ExperiaFiles.HardwareProfile]))
-            if(true)
+            //If the File Exists lets check to make sure the hardware is the same
+            bool makeFile = false;
+            if (File.Exists(m_Paths[ExperiaFiles.HardwareProfile]))
             {
+                XmlReaderSettings readerSettings = new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true };
+                XmlReader reader = XmlReader.Create(m_Paths[ExperiaFiles.HardwareProfile], readerSettings);
+
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            switch (reader.Name)
+                            {
+                                case "Machine":
+                                    if (reader.GetAttribute("HWGUID") != ExperiaHelper.Instance.HardwareGuidGen(graphics).ToString())
+                                        makeFile = true;
+                                    break;
+                            }
+                            break;
+                    }
+                }
+
+                reader.Close();
+            }
+
+            //This takes a bit so lets make sure that we even need to make the doc
+            if (!File.Exists(m_Paths[ExperiaFiles.HardwareProfile]) || makeFile)
+            {
+                
                 XmlWriter writer = XmlWriter.Create(m_Paths[ExperiaFiles.HardwareProfile], settings);
 
                 //OS Info
