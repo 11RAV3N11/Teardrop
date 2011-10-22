@@ -7,41 +7,60 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Experia.Framework
 {
-    public delegate void GraphicsRebuildArgs(GraphicsManager graphics);
-    //Suppressing Code Review for IDisposable, only time something needs to be disposed is on app exit.
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    
     public class GraphicsManager
     {
-        public GraphicsDevice Device { get { return m_GraphicsDeviceManager.GraphicsDevice; } }
+        /*********************************************************************/
+        public delegate void GraphicsRebuildArgs(GraphicsManager graphics);
         public static GraphicsManager Instance { get { return Experia.Framework.Generics.Singleton<GraphicsManager>.Instance; } }
+        /*********************************************************************/
+        public GraphicsDevice Device { get { return m_GraphicsDeviceManager.GraphicsDevice; } }
+        /*********************************************************************/
         public SpriteBatch SpriteBatch;
-        //Suppressing Analysis for Event Rebuild, does not match own design
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly")]
+        public Color BackBufferColor;
         public event GraphicsRebuildArgs HookGraphicsRebuild;
+        /*********************************************************************/
         protected bool m_DeviceChanged;
         protected Vector2[] m_v2Resolutions;
         protected PresentationParameters m_PresentationParams;
         protected GraphicsDeviceManager m_GraphicsDeviceManager;
+        protected Color m_backBufferStockColor = Color.CornflowerBlue;
+        protected Color m_renderTargetStockColor = Color.Purple;
+        /*********************************************************************/
         protected GraphicsManager() { }
+
+        /// <summary>Prepares the GraphicsManager internally for work, needs to be called in your XnaGame Constructor.</summary>
+        /// <param name="game">Your XnaGame</param>
         public void Initialize(Game game)
         {
             m_GraphicsDeviceManager = new GraphicsDeviceManager(game);
             m_v2Resolutions = new Vector2[2];
             m_PresentationParams = new PresentationParameters();
             m_DeviceChanged = true;
+            BackBufferColor = Color.CornflowerBlue;
         }
 
+        /// <summary>Prepares and sets up the SpriteBatch - Call in your Initialize Method</summary>
         public void EnableSprites()
         {
             if (SpriteBatch == null)
                 SpriteBatch = new SpriteBatch(m_GraphicsDeviceManager.GraphicsDevice);
         }
-        public void ScreenResolution(Vector2 v2Resolution)
+        public Vector2 ScreenResolution
         {
-            m_v2Resolutions[0] = v2Resolution;
-            m_PresentationParams.BackBufferWidth = (int)v2Resolution.X;
-            m_PresentationParams.BackBufferHeight = (int)v2Resolution.Y;
-            m_DeviceChanged = true;
+            get
+            {
+                return m_v2Resolutions[0];
+            }
+            set
+            {
+                m_v2Resolutions[0].X = value.X;
+                m_v2Resolutions[0].Y = value.Y;
+
+                m_PresentationParams.BackBufferWidth = (int)value.X;
+                m_PresentationParams.BackBufferHeight = (int)value.Y;
+                m_DeviceChanged = true;
+            }
         }
         public void SpriteResolution(Vector2 v2Resolution)
         {
@@ -80,6 +99,10 @@ namespace Experia.Framework
                 //Implementation for Fake Vsync
             }
         }
+        public void ClearBackbuffer()
+        {
+            Device.Clear(BackBufferColor);
+        }
         public void Update()
         {
             if (m_DeviceChanged)
@@ -95,7 +118,6 @@ namespace Experia.Framework
 
 
                 //++Recreate Our Shader Materials++//
-
                 m_DeviceChanged = false;
             }
         }

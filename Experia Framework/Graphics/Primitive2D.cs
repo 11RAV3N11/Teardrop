@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Experia.Framework.Graphics
+namespace Experia.Framework
 {
     public class Primitive2D
     {
@@ -84,6 +84,9 @@ namespace Experia.Framework.Graphics
             // Create the pixel texture.
             m_Pixel = new Texture2D(GraphicsManager.Instance.Device, 1, 1, false, SurfaceFormat.Color);
             m_Pixel.SetData<Color>(new Color[] { Color.White });
+            Color = Color.White;
+            Position = Vector2.Zero;
+            Depth = 0.0f;
             //
             /*************************************************************************/
         }
